@@ -13,7 +13,7 @@ public class RhythmController : MonoBehaviour
         public string phrase;
         public MoveDirection key;
 
-        public RhythmKey(float beat, string phrase, MoveDirection key)
+        public RhythmKey(float beat = 0f, string phrase = "", MoveDirection key = MoveDirection.None)
         {
             this.beat = beat;
             this.phrase = phrase;
@@ -34,7 +34,7 @@ public class RhythmController : MonoBehaviour
 
         public RhythmPattern(List<RhythmKey> keys, float length)
         {
-            this.keys = keys;
+            this.keys = keys ?? new List<RhythmKey>();
             this.length = length;
         }
     }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class RhythmTrackPlay : MonoBehaviour
 {
@@ -17,6 +18,10 @@ public class RhythmTrackPlay : MonoBehaviour
     public float swagThreshold = 0.04f;
     public float okayThreshold = 0.08f;
     public float badThreshold = 0.16f;
+
+    public Color swagColor = Color.white; 
+    public Color okayColor = Color.yellow; 
+    public Color badColor = Color.red;
 
     public bool isPlayback = false;
 
@@ -34,6 +39,7 @@ public class RhythmTrackPlay : MonoBehaviour
         set 
         { 
             beats = value;
+            rect ??= GetComponent<RectTransform>();
             rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, sizePerBeat * (value + leadingBeats) + 2 * horizontalPadding);
         }
     }
@@ -96,8 +102,6 @@ public class RhythmTrackPlay : MonoBehaviour
         Vector3 position = new Vector3(horizontalPadding, 0);
         rect.anchoredPosition = position;
 
-        yield return new WaitForSeconds(2f);
-
         int currentIndex = 0;
         
         while (CalculateBeat() < pattern.length)
@@ -107,63 +111,74 @@ public class RhythmTrackPlay : MonoBehaviour
             position.x = horizontalPadding + (CalculateBeat() + leadingBeats) * sizePerBeat;
             rect.anchoredPosition = position;
 
-            // Score calculation
-            MoveDirection keyPressed = GetPressedButton();
-            if (keyPressed != MoveDirection.None && currentIndex < pattern.keys.Count)
+            if (isPlayback)
             {
-                float error = timePassed - pattern.keys[currentIndex].beat * 60 / bpm;
-                if (Math.Abs(error) <= badThreshold)
+                // Score calculation
+                MoveDirection keyPressed = GetPressedButton();
+
+                if (keyPressed != MoveDirection.None)
                 {
-                    if (keyPressed != pattern.keys[currentIndex].key)
+                    GameObject newObject = Instantiate(button, transform);
+                    RhythmButton buttonScript = newObject.GetComponent<RhythmButton>();
+                    Text text = buttonScript.phrase;
+                    buttonScript.Direction = keyPressed;
+                    newObject.GetComponent<RectTransform>().anchoredPosition = new Vector3(horizontalPadding + (CalculateBeat() + leadingBeats) * sizePerBeat, 0, 0);
+                    text.text = "??";
+                    text.color = badColor;
+
+                    if (currentIndex < pattern.keys.Count)
                     {
-                        // Wrong key
-                        score.badCount++;
-                        Debug.Log("Wrong key!");
+                        float error = timePassed - pattern.keys[currentIndex].beat * 60 / bpm;
+                        if (Math.Abs(error) <= badThreshold)
+                        {
+                            if (keyPressed != pattern.keys[currentIndex].key)
+                            {
+                                // Wrong key
+                                score.badCount++;
+                            }
+                            else if (Math.Abs(error) <= swagThreshold)
+                            {
+                                score.swagCount++;
+                                text.text = pattern.keys[currentIndex].phrase;
+                                text.color = swagColor;
+                            }
+                            else if (Math.Abs(error) <= okayThreshold)
+                            {
+                                score.okayCount++;
+                                text.text = pattern.keys[currentIndex].phrase + "?";
+                                text.color = okayColor;
+                            }
+                            else
+                            {
+                                score.badCount++;
+                            }
+                            currentIndex++;
+                        }
                     }
-                    else if (Math.Abs(error) <= swagThreshold)
-                    {
-                        score.swagCount++;
-                        Debug.Log($"Swag! {error * 1000}ms");
-                    }
-                    else if (Math.Abs(error) <= okayThreshold)
-                    {
-                        score.okayCount++;
-                        Debug.Log($"Okay! {error * 1000}ms");
-                    }
-                    else
-                    {
-                        score.badCount++;
-                        Debug.Log($"Bad! {error * 1000}ms");
-                    }
+                }
+                if (currentIndex < pattern.keys.Count && (timePassed - pattern.keys[currentIndex].beat * 60 / bpm) > badThreshold)
+                {
+                    score.badCount++;
                     currentIndex++;
                 }
             }
-            if (currentIndex < pattern.keys.Count && (timePassed - pattern.keys[currentIndex].beat * 60 / bpm) > badThreshold)
-            {
-                score.badCount++;
-                currentIndex++;
-                Debug.Log($"Too late!");
-            }
         }
-        Debug.Log($"Swag: {score.swagCount}; Okay: {score.okayCount}; Bad: {score.badCount}");
+        if (isPlayback)
+        {
+            if (currentIndex < pattern.keys.Count)
+            {
+                score.badCount += pattern.keys.Count - currentIndex;
+            }
+            Debug.Log($"Swag: {score.swagCount}; Okay: {score.okayCount}; Bad: {score.badCount}");
+        }
+        Destroy(createdBar);
+        createdBar = null;
     }
     // Start is called before the first frame update
     void Start()
-    {
-        rect = GetComponent<RectTransform>();
-        ApplyRhythmPattern(new RhythmController.RhythmPattern(
-            new List<RhythmController.RhythmKey>(
-                new RhythmController.RhythmKey[]
-                {
-                    new RhythmController.RhythmKey(0.0f, "This", MoveDirection.Left),
-                    new RhythmController.RhythmKey(1.0f, "is", MoveDirection.Right),
-                    new RhythmController.RhythmKey(2.0f, "a", MoveDirection.Up),
-                    new RhythmController.RhythmKey(3.0f, "test", MoveDirection.Down),
-
-                }),
-            4.0f));
-        RhythmScore score = new RhythmScore();
-        StartCoroutine(PlayPattern(score));
+    {   
+        // RhythmScore score = new RhythmScore();
+        // StartCoroutine(PlayPattern(score));
     }
 
     // Update is called once per frame

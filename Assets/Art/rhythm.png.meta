@@ -257,7 +257,7 @@ TextureImporter:
         width: 8
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -265,6 +265,69 @@ TextureImporter:
       bones: []
       spriteID: 6a5408a1cd6db9b44b070bcb5adfa5a7
       internalID: -2109517053
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rhythm_7
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 32
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac3e29b749dd84c46ae8ed5afab13ab1
+      internalID: 1465345975
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rhythm_8
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 16
+        width: 32
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 590d7dbf5218e2446a219914dfe4c362
+      internalID: 324362727
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rhythm_9
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f24365999d5f644a80ca2e156c033bf
+      internalID: 229960786
       vertices: []
       indices: 
       edges: []
@@ -287,6 +350,9 @@ TextureImporter:
       rhythm_4: -877479867
       rhythm_5: -1486146918
       rhythm_6: -2109517053
+      rhythm_7: 1465345975
+      rhythm_8: 324362727
+      rhythm_9: 229960786
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
