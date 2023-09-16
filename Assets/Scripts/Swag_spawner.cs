@@ -51,11 +51,12 @@ public class Swag_spawner : MonoBehaviour
         randmPosition.z = 0;
         swag_prefab.swag_value = value_set[Random.Range(0,value_set.Length)];
         swag_prefab.time_to_disappear = time_set[Random.Range(0, time_set.Length)];
-        if (sprite_dict.Count() != 0) {
-            string sprite_key = sprite_dict.ElementAt(Random.Range(0, sprite_dict.Count)).Key;
+        string sprite_key = sprite_dict.ElementAt(Random.Range(0, sprite_dict.Count)).Key;
+        if (sprite_dict.Count > 0)
+        {
             swag_prefab.GetComponent<SpriteRenderer>().sprite = sprite_dict[sprite_key];
         }
-       
+
         Swag dummy = Instantiate(swag_prefab, randmPosition, Quaternion.identity);
         swagList.Add(dummy);
     }
