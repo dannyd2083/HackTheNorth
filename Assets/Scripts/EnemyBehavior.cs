@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyBehavior : MonoBehaviour
@@ -12,6 +13,7 @@ public class EnemyBehavior : MonoBehaviour
     public float arrivalLimit; // If the enemy is within this distance of the wandering target, it has arrived and will find a new target
                                // Note that other targets use the colliders. This is just for wandering because no object actually exists there.
     GameObject targetObject;
+    List<ContactPoint2D> collisionPoints = new List<ContactPoint2D>();
     Vector2 targetPosition;
     Rigidbody2D rb;
     double spawnTime;
@@ -52,24 +54,20 @@ public class EnemyBehavior : MonoBehaviour
             acquireTarget();
         }
 
+        // Direction to move in
+        Vector2 deltaPos = Vector2.zero;
         switch (movementScheme) {
         case MovementScheme.WANDERING: {
-                Vector2 deltaPos = targetPosition - (Vector2)transform.position;
-                Vector2 acceleration = deltaPos.normalized * defaultAcceleration * Time.deltaTime;
-                rb.AddForce(acceleration);
+                deltaPos = targetPosition - (Vector2)transform.position;
             }
             break;
         case MovementScheme.SWARMING: {
-                Vector2 deltaPos = (Vector2)targetObject.gameObject.transform.position - (Vector2)transform.position;
-                Vector2 acceleration = deltaPos.normalized * defaultAcceleration * Time.deltaTime;
-                rb.AddForce(acceleration);
+                deltaPos = (Vector2)targetObject.gameObject.transform.position - (Vector2)transform.position;
             }
             break;
         case MovementScheme.RETREATING: {
                 // Simple straight line retreating
-                Vector2 deltaPos = (Vector2)targetObject.gameObject.transform.position - (Vector2)transform.position;
-                Vector2 acceleration = deltaPos.normalized * defaultAcceleration * Time.deltaTime;
-                rb.AddForce(acceleration);
+                deltaPos = (Vector2)targetObject.gameObject.transform.position - (Vector2)transform.position;
             }
             break;
         case MovementScheme.BROWSING: {
@@ -77,7 +75,9 @@ public class EnemyBehavior : MonoBehaviour
             }
             break;
         }
+        Vector2 acceleration = deltaPos.normalized * defaultAcceleration * Time.deltaTime;
 
+        rb.AddForce(acceleration);
     }
 
     public void acquireTarget() {
@@ -98,7 +98,7 @@ public class EnemyBehavior : MonoBehaviour
             targetPosition = targetObject.transform.position;
             movementScheme = MovementScheme.SWARMING;
             return true;
-        } 
+        }
         else {
             // If there is no swag, wander around
             return false;
@@ -138,6 +138,14 @@ public class EnemyBehavior : MonoBehaviour
         else if (collision.gameObject.tag == "spawner" && movementScheme == MovementScheme.RETREATING) {
             // Bye bye
             Destroy(gameObject);
+        }
+        else {
+            ContactPoint2D[] contacts = new ContactPoint2D[10];
+            collision.GetContacts(contacts);
+            foreach (ContactPoint2D contactpoint in contacts) {
+                collisionPoints.Add(contactpoint);
+                break;
+            }
         }
     }
 }

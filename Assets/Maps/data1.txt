@@ -1,0 +1,2 @@
+﻿difficulty=1
+time=180
