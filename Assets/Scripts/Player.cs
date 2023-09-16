@@ -9,6 +9,7 @@ public class Player : LivingEntity
     Camera viewCamera;
     PlayerController controller;
     Vector2 movement;
+    Game_Controller gm;
 
     // Start is called before the first frame update
     protected override void Start()
@@ -17,6 +18,7 @@ public class Player : LivingEntity
         base.Start();
         viewCamera = Camera.main;
         controller = GetComponent<PlayerController>();
+        gm = FindObjectOfType<Game_Controller>();
         
     }
 
@@ -27,5 +29,16 @@ public class Player : LivingEntity
         movement.y = Input.GetAxisRaw("Vertical");
         controller.Move(movement * moveSpeed);
        
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "swag")
+        {
+            GameObject.Destroy(collision.gameObject);
+            gm.scores =+ collision.gameObject.GetComponent<Swag>().swag_value;
+            gm.swag_spawner.swagList.Remove(collision.gameObject.GetComponent<Swag>());
+        }
+
     }
 }
