@@ -9,6 +9,7 @@ public class Player : LivingEntity
     Camera viewCamera;
     PlayerController controller;
     Vector2 movement;
+    Game_Controller gm;
 
     public Rigidbody2D body;
 
@@ -17,6 +18,7 @@ public class Player : LivingEntity
         base.Start();
         viewCamera = Camera.main;
         controller = GetComponent<PlayerController>();
+        gm = FindObjectOfType<Game_Controller>();
         
     }
 
@@ -27,6 +29,19 @@ public class Player : LivingEntity
         movement.y = Input.GetAxisRaw("Vertical");
         controller.Move(movement * acceleration);
 
+
+    }
+
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.gameObject.tag == "swag")
+        {
+            Debug.Log("destroy");
+            GameObject.Destroy(collider.gameObject);
+            gm.scores =+ collider.gameObject.GetComponent<Swag>().swag_value;
+            gm.swag_spawner.swagList.Remove(collider.gameObject.GetComponent<Swag>());
+            gm.swag_spawner.spwan();
+        }
 
     }
 }
