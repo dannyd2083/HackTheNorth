@@ -15,6 +15,7 @@ public class RhythmButton : MonoBehaviour
     }
     public List<SpritePair> sprites;
     public Sprite defaultSprite;
+    public Text phrase;
     private MoveDirection direction = MoveDirection.None;
     private Image image;
 
@@ -34,8 +35,7 @@ public class RhythmButton : MonoBehaviour
 
     private void Start()
     {
-        image = GetComponent<Image>();
-        //StartCoroutine(Sequence());
+
     }
     public MoveDirection Direction
     {
@@ -52,6 +52,7 @@ public class RhythmButton : MonoBehaviour
                     break;
                 }
             }
+            image ??= GetComponent<Image>();
             image.sprite = newSprite;
         }
     }
