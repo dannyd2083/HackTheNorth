@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class EnemyBehavior : MonoBehaviour
@@ -8,21 +9,26 @@ public class EnemyBehavior : MonoBehaviour
     public float maxX;
     public float maxY;
     public float exitTime; // After 100 seconds, the enemy will leave the HTN Sponsor Area
-    public float arrivalLimit; // If the enemy is within this distance of the target, it has arrived and will find a new target
-    public float exitLimit; // If the enemy is within this distance of the spawn point, it will exit
-    bool exit = false;
-    Vector2 targetPos;
-    Vector2 originalPos;
-    Vector2 spawnPos;
+    public float arrivalLimit; // If the enemy is within this distance of the wandering target, it has arrived and will find a new target
+                               // Note that other targets use the colliders. This is just for wandering because no object actually exists there.
+    GameObject targetObject;
+    Vector2 targetPosition;
     Rigidbody2D rb;
     double spawnTime;
+    MovementScheme movementScheme;
+
+    enum MovementScheme {
+        WANDERING,       // Randomly move around the room, no swag in sight
+        SWARMING,        // Swarm towards swag
+        RETREATING,      // Move towards the exit
+        BROWSING         // Move along tables, looking for swag. NOT IMPLEMENTED - MAYBE LATER
+    }
 
     // Start is called before the first frame update
     void Start() {
         rb = GetComponent<Rigidbody2D>();
         acquireTarget();
         spawnTime = Time.time;
-        spawnPos = transform.position;
     }
 
     // Update is called once per frame
@@ -31,39 +37,107 @@ public class EnemyBehavior : MonoBehaviour
     }
 
     private void FixedUpdate() {
-
         // Target acquisition
-        Vector2 currentPos = transform.position;
-        Vector2 currentDelta = targetPos - currentPos;
-        if (exit && currentDelta.magnitude < exitLimit) {
-            // If the player is exiting, destroy the enemy when it reaches the spawn point
-            GameObject.Destroy(gameObject);
-            return;
+
+        if (Time.time - spawnTime > exitTime) {
+            // Time to leave
+            acquireExit();
         }
-        if (currentDelta.magnitude < arrivalLimit) {
-            // Otherwise, reacquire the target
+
+        // Check if we reached wander target
+        if ((targetPosition - (Vector2)transform.position).magnitude < arrivalLimit && movementScheme == MovementScheme.WANDERING) {
+            acquireTarget();
+        }
+        if (targetObject == null && movementScheme == MovementScheme.SWARMING) {
             acquireTarget();
         }
 
-        // Actually, try to exit if the target is too far away
-        if (Time.time - spawnTime > exitTime) {
-            // Set the target to be the spawnpoint (you exit the same way you get in, for now)
-            exit = true;
-            targetPos = spawnPos;
+        switch (movementScheme) {
+        case MovementScheme.WANDERING: {
+                Vector2 deltaPos = targetPosition - (Vector2)transform.position;
+                Vector2 acceleration = deltaPos.normalized * defaultAcceleration * Time.deltaTime;
+                rb.AddForce(acceleration);
+            }
+            break;
+        case MovementScheme.SWARMING: {
+                Vector2 deltaPos = (Vector2)targetObject.gameObject.transform.position - (Vector2)transform.position;
+                Vector2 acceleration = deltaPos.normalized * defaultAcceleration * Time.deltaTime;
+                rb.AddForce(acceleration);
+            }
+            break;
+        case MovementScheme.RETREATING: {
+                // Simple straight line retreating
+                Vector2 deltaPos = (Vector2)targetObject.gameObject.transform.position - (Vector2)transform.position;
+                Vector2 acceleration = deltaPos.normalized * defaultAcceleration * Time.deltaTime;
+                rb.AddForce(acceleration);
+            }
+            break;
+        case MovementScheme.BROWSING: {
+                // NOT IMPLEMENTED - IF WE HAVE TIME!
+            }
+            break;
         }
 
-        // Movement - simple straight line for now
-        Vector2 deltaPos = targetPos - (Vector2)transform.position;
-        Vector2 acceleration = deltaPos.normalized * defaultAcceleration * Time.deltaTime;
-        rb.AddForce(acceleration);
     }
 
     public void acquireTarget() {
-        // For now, use a random target
-        targetPos.x = Random.Range(-maxX, maxX);
-        targetPos.y = Random.Range(-maxY, maxY);
-        // When tables are set up, they will try to find a random table to move to.
-        // Also reset original position
-        originalPos = transform.position;
+        if (acquireSwag()) return;
+        acquireWanderTarget();
+    }
+
+    public bool acquireSwag() {
+        // Find a random swag
+        GameObject[] swag = GameObject.FindGameObjectsWithTag("swag");
+        if (swag.Length > 1)
+        {
+            GameObject newTarget;
+            do {
+                newTarget = swag[Random.Range(0, swag.Length)];
+            } while (newTarget == targetObject);
+            targetObject = newTarget;
+            targetPosition = targetObject.transform.position;
+            movementScheme = MovementScheme.SWARMING;
+            return true;
+        } 
+        else {
+            // If there is no swag, wander around
+            return false;
+        }
+    }
+
+    public void acquireWanderTarget() {
+        // Go to a random, valid tile
+        targetPosition = new Vector2(Random.Range(-maxX, maxX), Random.Range(-maxY, maxY));
+        movementScheme = MovementScheme.WANDERING;
+    }
+
+    public void acquireExit() {
+        // Find the closest exit
+        GameObject[] exits = GameObject.FindGameObjectsWithTag("spawner");
+        GameObject closestExit = exits[0];
+        float closestDistance = (closestExit.transform.position - transform.position).magnitude;
+        foreach (GameObject exit in exits) {
+            float distance = (exit.transform.position - transform.position).magnitude;
+            if (distance < closestDistance)
+            {
+                closestExit = exit;
+                closestDistance = distance;
+            }
+        }
+        targetObject = closestExit;
+        targetPosition = targetObject.transform.position;
+        movementScheme = MovementScheme.RETREATING; 
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision) {
+        //Debug.Log(collision.gameObject.tag);
+        if (collision.gameObject == targetObject && movementScheme == MovementScheme.SWARMING) {
+            // Find someplace new to wander to
+            acquireTarget();
+        }
+        else if (collision.gameObject.tag == "spawner" && movementScheme == MovementScheme.RETREATING) {
+            // Bye bye
+            Destroy(gameObject);
+        }
     }
 }

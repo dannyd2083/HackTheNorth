@@ -40,7 +40,7 @@ public class Player : LivingEntity
             GameObject.Destroy(collider.gameObject);
             gm.scores =+ collider.gameObject.GetComponent<Swag>().swag_value;
             gm.swag_spawner.swagList.Remove(collider.gameObject.GetComponent<Swag>());
-            gm.swag_spawner.spwan();
+            gm.swag_spawner.spawn();
         }
 
     }

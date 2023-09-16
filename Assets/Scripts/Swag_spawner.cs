@@ -15,7 +15,7 @@ public class Swag_spawner : MonoBehaviour
     {
         for (int i = 0; i < max_number_list; i++)
         {
-            spwan();
+            spawn();
         }
     }
 
@@ -25,7 +25,7 @@ public class Swag_spawner : MonoBehaviour
         
     }
 
-    public void spwan()
+    public void spawn()
     {
         Vector3 randmPosition;
         randmPosition.x = Random.Range(1, instantiate_range_x);
