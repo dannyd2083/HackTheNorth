@@ -34,6 +34,8 @@ public class RhythmMinigame : MonoBehaviour
     public TextAsset mediumPatternsFile;
     public TextAsset hardPatternsFile;
 
+    public MusicSync bgm;
+
     private RhythmPattern pattern;
 
     public void ApplyRhythmPattern(RhythmPattern pattern)
@@ -47,6 +49,16 @@ public class RhythmMinigame : MonoBehaviour
 
     public IEnumerator PlayPattern(RhythmScore score)
     {
+        float leadingBeatNum = bgm.beatsPerMeasure - leadingBeats;
+        bool lowBeat = false;
+        while (!lowBeat || bgm.BeatInMeasure < leadingBeatNum)
+        {
+            yield return null;
+            if (bgm.BeatInMeasure < leadingBeatNum)
+            {
+                lowBeat = true;
+            }
+        }
         StartCoroutine(mimicTrack.PlayPattern(score));
         yield return new WaitForSeconds(pattern.length / timeMultiplier * 60 / bpm);
         StartCoroutine(makerTrack.PlayPattern(score));
@@ -86,7 +98,7 @@ public class RhythmMinigame : MonoBehaviour
         mimicTrack.okayColor = makerTrack.okayColor = okayColor;
         mimicTrack.badColor = makerTrack.badColor = badColor;
 
-        AvailablePatterns easyPatterns = JsonUtility.FromJson<AvailablePatterns>(mediumPatternsFile.text);
+        AvailablePatterns easyPatterns = JsonUtility.FromJson<AvailablePatterns>(hardPatternsFile.text);
         RhythmPattern chosen = easyPatterns.patterns[Random.Range(0, easyPatterns.patterns.Count)];
         ApplyRhythmPattern(chosen);
         /*
