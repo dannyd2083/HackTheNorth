@@ -928,14 +928,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c63402792090f374b9bbf1b74200b207, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sizePerBeat: 128
+  sizePerBeat: 192
   leadingBeats: 0.5
   horizontalPadding: 4
-  bpm: 118
+  bpm: 84
   timeMultiplier: 1
-  swagThreshold: 0.04
-  okayThreshold: 0.12
-  badThreshold: 0.18
+  swagThreshold: 0.06
+  okayThreshold: 0.15
+  badThreshold: 0.2
   swagColor: {r: 1, g: 1, b: 1, a: 1}
   okayColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   badColor: {r: 1, g: 0, b: 0, a: 1}
@@ -945,6 +945,9 @@ MonoBehaviour:
   swagSprite: {fileID: 1465345975, guid: c682fd1a99dc1c047ba7d64a74df8c3f, type: 3}
   okaySprite: {fileID: 324362727, guid: c682fd1a99dc1c047ba7d64a74df8c3f, type: 3}
   badSprite: {fileID: 229960786, guid: c682fd1a99dc1c047ba7d64a74df8c3f, type: 3}
+  easyPatternsFile: {fileID: 4900000, guid: 75842a18c8e3be447ad48a1fe8c3b3d1, type: 3}
+  mediumPatternsFile: {fileID: 4900000, guid: c873f9ede089b1d4e9cf3f67b676ce81, type: 3}
+  hardPatternsFile: {fileID: 4900000, guid: 9c79ed55791186e4aa12b12b235e2b7b, type: 3}
 --- !u!1 &1893632561
 GameObject:
   m_ObjectHideFlags: 0

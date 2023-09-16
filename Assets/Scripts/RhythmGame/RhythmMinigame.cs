@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using static RhythmController;
 
 public class RhythmMinigame : MonoBehaviour
 {
@@ -29,9 +30,13 @@ public class RhythmMinigame : MonoBehaviour
     public Sprite okaySprite;
     public Sprite badSprite;
 
-    private RhythmController.RhythmPattern pattern;
+    public TextAsset easyPatternsFile;
+    public TextAsset mediumPatternsFile;
+    public TextAsset hardPatternsFile;
 
-    public void ApplyRhythmPattern(RhythmController.RhythmPattern pattern)
+    private RhythmPattern pattern;
+
+    public void ApplyRhythmPattern(RhythmPattern pattern)
     {
         this.pattern = pattern;
         
@@ -43,9 +48,9 @@ public class RhythmMinigame : MonoBehaviour
     public IEnumerator PlayPattern(RhythmScore score)
     {
         StartCoroutine(mimicTrack.PlayPattern(score));
-        yield return new WaitForSeconds(pattern.length * timeMultiplier * 60 / bpm);
+        yield return new WaitForSeconds(pattern.length / timeMultiplier * 60 / bpm);
         StartCoroutine(makerTrack.PlayPattern(score));
-        yield return new WaitForSeconds(pattern.length * timeMultiplier * 60 / bpm);
+        yield return new WaitForSeconds((pattern.length + leadingBeats) / timeMultiplier * 60 / bpm);
         float scoreRatio = score.CalculateSuccessRatio(pattern.keys.Count);
         if (scoreRatio >= 0.8)
         {
@@ -60,7 +65,7 @@ public class RhythmMinigame : MonoBehaviour
             image.sprite = badSprite;
         }
         image.gameObject.SetActive(true);
-        yield return new WaitForSeconds(leadingBeats * timeMultiplier * 60 / bpm);
+        yield return new WaitForSeconds(leadingBeats / timeMultiplier * 60 / bpm);
         image.gameObject.SetActive(false);
     }
 
@@ -81,6 +86,10 @@ public class RhythmMinigame : MonoBehaviour
         mimicTrack.okayColor = makerTrack.okayColor = okayColor;
         mimicTrack.badColor = makerTrack.badColor = badColor;
 
+        AvailablePatterns easyPatterns = JsonUtility.FromJson<AvailablePatterns>(mediumPatternsFile.text);
+        RhythmPattern chosen = easyPatterns.patterns[Random.Range(0, easyPatterns.patterns.Count)];
+        ApplyRhythmPattern(chosen);
+        /*
         ApplyRhythmPattern(new RhythmController.RhythmPattern(
             new List<RhythmController.RhythmKey>(
                 new RhythmController.RhythmKey[]
@@ -92,6 +101,8 @@ public class RhythmMinigame : MonoBehaviour
 
                 }),
             4.0f));
+        */
+        Debug.Log(JsonUtility.ToJson(pattern));
         RhythmScore score = new RhythmScore();
         StartCoroutine(PlayPattern(score));
     }

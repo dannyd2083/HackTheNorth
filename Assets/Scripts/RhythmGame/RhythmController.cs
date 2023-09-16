@@ -11,6 +11,9 @@ public class RhythmController : MonoBehaviour
     {
         public float beat;
         public string phrase;
+        /*
+         * Seriaization: Left = 0; Up = 1; Right = 2; Down = 3; None = 4
+         */
         public MoveDirection key;
 
         public RhythmKey(float beat = 0f, string phrase = "", MoveDirection key = MoveDirection.None)
@@ -38,6 +41,18 @@ public class RhythmController : MonoBehaviour
             this.length = length;
         }
     }
+
+    [Serializable]
+    public struct AvailablePatterns
+    {
+        public List<RhythmPattern> patterns;
+
+        public AvailablePatterns(List<RhythmPattern> patterns)
+        {
+            this.patterns = patterns;
+        }
+    }
+
 
     public List<RhythmPattern> patterns;
     public float bpm = 118.0f;
