@@ -5,16 +5,16 @@ using UnityEngine;
 public class Player : LivingEntity
 {
 
-    public float moveSpeed;
+    public float acceleration;
     Camera viewCamera;
     PlayerController controller;
     Vector2 movement;
     Game_Controller gm;
 
-    // Start is called before the first frame update
-    protected override void Start()
-    {
+    public Rigidbody2D body;
 
+    // Start is called before the first frame update
+    protected override void Start() {
         base.Start();
         viewCamera = Camera.main;
         controller = GetComponent<PlayerController>();
@@ -27,8 +27,9 @@ public class Player : LivingEntity
     {
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
-        controller.Move(movement * moveSpeed);
-       
+        controller.Move(movement * acceleration);
+
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
