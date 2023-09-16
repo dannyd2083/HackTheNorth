@@ -32,13 +32,15 @@ public class Player : LivingEntity
 
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collision.gameObject.tag == "swag")
+        if (collider.gameObject.tag == "swag")
         {
-            GameObject.Destroy(collision.gameObject);
-            gm.scores =+ collision.gameObject.GetComponent<Swag>().swag_value;
-            gm.swag_spawner.swagList.Remove(collision.gameObject.GetComponent<Swag>());
+            Debug.Log("destroy");
+            GameObject.Destroy(collider.gameObject);
+            gm.scores =+ collider.gameObject.GetComponent<Swag>().swag_value;
+            gm.swag_spawner.swagList.Remove(collider.gameObject.GetComponent<Swag>());
+            gm.swag_spawner.spwan();
         }
 
     }
