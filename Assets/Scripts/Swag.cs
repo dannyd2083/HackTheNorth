@@ -16,18 +16,18 @@ public class Swag : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        time_to_disappear--;
-    }
+    //void Update()
+    //{
+    //    time_to_disappear--;
+    //}
 
-    void dispear()
-    {
-        if(time_to_disappear <=0 && this != null)
-        {
-            GameObject.Destroy(this);
-        }
-    }
+    //void dispear()
+    //{
+    //    if(time_to_disappear <=0 && this != null)
+    //    {
+    //        GameObject.Destroy(this);
+    //    }
+    //}
 
 
 
