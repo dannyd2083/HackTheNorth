@@ -4,20 +4,6 @@
         {
             "keys":
             [
-                {"beat":0.0,"phrase":"Gi-","key":2},
-                {"beat":0.25,"phrase":"mme","key":3},
-                {"beat":0.75,"phrase":"that","key":0},
-                {"beat":1.0,"phrase":"swag,","key":3},
-                {"beat":1.5,"phrase":"gi-","key":2},
-                {"beat":1.75,"phrase":"mme","key":2},
-                {"beat":2.0,"phrase":"that","key":0},
-                {"beat":2.5,"phrase":"swag!","key":3}
-            ],
-            "length":4.0
-        },
-        {
-            "keys":
-            [
                 {"beat":0.0,"phrase":"I","key":1},
                 {"beat":0.5,"phrase":"want","key":0},
                 {"beat":0.75,"phrase":"that","key":0},
@@ -35,21 +21,6 @@
         {
             "keys":
             [
-                {"beat":0.0,"phrase":"Come","key":2},
-                {"beat":0.25,"phrase":"on,","key":3},
-                {"beat":0.75,"phrase":"come","key":2},
-                {"beat":1.0,"phrase":"on!","key":3},
-                {"beat":1.5,"phrase":"Just","key":0},
-                {"beat":2.0,"phrase":"gi-","key":2},
-                {"beat":2.25,"phrase":"mme","key":2},
-                {"beat":2.5,"phrase":"that","key":1},
-                {"beat":3.0,"phrase":"swag!","key":3}
-            ],
-            "length":4.0
-        },
-        {
-            "keys":
-            [
                 {"beat":0.0,"phrase":"That","key":3},
                 {"beat":0.25,"phrase":"swag","key":2},
                 {"beat":0.75,"phrase":"looks","key":0},
@@ -60,6 +31,74 @@
                 {"beat":2.5,"phrase":"to","key":2},
                 {"beat":2.75,"phrase":"me","key":2},
                 {"beat":3.0,"phrase":"now!","key":3}
+            ],
+            "length":4.0
+        },
+        {
+            "keys":
+            [
+                {"beat":0.0,"phrase":"Can","key":0},
+                {"beat":0.25,"phrase":"you","key":2},
+                {"beat":0.5,"phrase":"please","key":1},
+                {"beat":1.0,"phrase":"give","key":1},
+                {"beat":1.5,"phrase":"me","key":2},
+                {"beat":1.75,"phrase":"that","key":0},
+                {"beat":2.0,"phrase":"swag","key":3},
+                {"beat":2.5,"phrase":"o-","key":2},
+                {"beat":2.75,"phrase":"ver","key":0},
+                {"beat":3.0,"phrase":"there?","key":1}
+            ],
+            "length":4.0
+        },
+        {
+            "keys":
+            [
+                {"beat":0.25,"phrase":"I","key":2},
+                {"beat":0.5,"phrase":"real-","key":2},
+                {"beat":0.75,"phrase":"ly","key":0},
+                {"beat":1.0,"phrase":"real-","key":2},
+                {"beat":1.25,"phrase":"ly","key":0},
+                {"beat":1.5,"phrase":"real-","key":2},
+                {"beat":1.75,"phrase":"ly","key":0},
+                {"beat":2.0,"phrase":"real-","key":3},
+                {"beat":2.25,"phrase":"ly","key":0},
+                {"beat":2.5,"phrase":"want","key":2},
+                {"beat":2.75,"phrase":"that","key":2},
+                {"beat":3.0,"phrase":"swag!","key":3}
+            ],
+            "length":4.0
+        },
+        {
+            "keys":
+            [
+                {"beat":0.0,"phrase":"That","key":1},
+                {"beat":0.25,"phrase":"swag","key":3},
+                {"beat":0.5,"phrase":"looks","key":0},
+                {"beat":1.0,"phrase":"real-","key":2},
+                {"beat":1.25,"phrase":"ly","key":2},
+                {"beat":1.5,"phrase":"cool,","key":3},
+                {"beat":2.0,"phrase":"I","key":1},
+                {"beat":2.25,"phrase":"wish","key":2},
+                {"beat":2.5,"phrase":"I","key":1},
+                {"beat":2.75,"phrase":"could","key":0},
+                {"beat":3.0,"phrase":"have","key":2},
+                {"beat":3.25,"phrase":"it","key":0}
+            ],
+            "length":4.0
+        },
+        {
+            "keys":
+            [
+                {"beat":0.5,"phrase":"Please","key":3},
+                {"beat":1.0,"phrase":"gi-","key":1},
+                {"beat":1.25,"phrase":"mme","key":1},
+                {"beat":1.5,"phrase":"that","key":0},
+                {"beat":2.0,"phrase":"swag","key":3},
+                {"beat":2.5,"phrase":"there,","key":0},
+                {"beat":3.0,"phrase":"im-","key":3},
+                {"beat":3.25,"phrase":"me-","key":2},
+                {"beat":3.5,"phrase":"diate-","key":0},
+                {"beat":3.75,"phrase":"ly","key":1}
             ],
             "length":4.0
         }

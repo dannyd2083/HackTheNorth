@@ -4,29 +4,6 @@
         {
             "keys":
             [
-                {"beat":0.0,"phrase":"Can","key":0},
-                {"beat":0.5,"phrase":"I","key":2},
-                {"beat":1.0,"phrase":"have","key":0},
-                {"beat":1.5,"phrase":"that","key":0},
-                {"beat":2.0,"phrase":"swag,","key":2},
-                {"beat":3.0,"phrase":"please?","key":1}
-            ],
-            "length":4.0
-        },
-        {
-            "keys":
-            [
-                {"beat":0.0,"phrase":"Please,","key":3},
-                {"beat":0.75,"phrase":"I","key":2},
-                {"beat":1.0,"phrase":"want","key":0},
-                {"beat":1.5,"phrase":"that","key":0},
-                {"beat":2.0,"phrase":"swag!","key":2}
-            ],
-            "length":4.0
-        },
-        {
-            "keys":
-            [
                 {"beat":0.0,"phrase":"That","key":3},
                 {"beat":0.25,"phrase":"swag","key":2},
                 {"beat":0.75,"phrase":"looks","key":0},
@@ -36,6 +13,16 @@
                 {"beat":2.5,"phrase":"it!","key":3}
             ],
             "length":4.0
+        },
+        {
+            "keys":
+            [
+                {"beat":0.0,"phrase":"I","key":1},
+                {"beat":0.25,"phrase":"need","key":2},
+                {"beat":1.0,"phrase":"that","key":2},
+                {"beat":1.25,"phrase":"swag!","key":3}
+            ],
+            "length":2.0
         },
         {
             "keys":
@@ -60,6 +47,50 @@
                 {"beat":2.0,"phrase":"in","key":2},
                 {"beat":2.75,"phrase":"my","key":0},
                 {"beat":3.0,"phrase":"life!","key":3}
+            ],
+            "length":4.0
+        },
+        {
+            "keys":
+            [
+                {"beat":0.0,"phrase":"I","key":3},
+                {"beat":0.5,"phrase":"need","key":2},
+                {"beat":0.75,"phrase":"that","key":0},
+                {"beat":1.0,"phrase":"swag","key":1},
+                {"beat":1.5,"phrase":"in","key":0},
+                {"beat":1.75,"phrase":"my","key":0},
+                {"beat":2.0,"phrase":"life","key":3},
+                {"beat":2.5,"phrase":"right","key":3},
+                {"beat":3.0,"phrase":"now!","key":3}
+            ],
+            "length":4.0
+        },
+        {
+            "keys":
+            [
+                {"beat":0.0,"phrase":"Gi-","key":2},
+                {"beat":0.25,"phrase":"mme","key":3},
+                {"beat":0.75,"phrase":"that","key":0},
+                {"beat":1.0,"phrase":"swag,","key":3},
+                {"beat":1.5,"phrase":"gi-","key":2},
+                {"beat":1.75,"phrase":"mme","key":2},
+                {"beat":2.0,"phrase":"that","key":0},
+                {"beat":2.5,"phrase":"swag!","key":3}
+            ],
+            "length":4.0
+        },
+        {
+            "keys":
+            [
+                {"beat":0.0,"phrase":"Come","key":2},
+                {"beat":0.25,"phrase":"on,","key":3},
+                {"beat":0.75,"phrase":"come","key":2},
+                {"beat":1.0,"phrase":"on!","key":3},
+                {"beat":1.5,"phrase":"Just","key":0},
+                {"beat":2.0,"phrase":"gi-","key":2},
+                {"beat":2.25,"phrase":"mme","key":2},
+                {"beat":2.5,"phrase":"that","key":1},
+                {"beat":3.0,"phrase":"swag!","key":3}
             ],
             "length":4.0
         }
