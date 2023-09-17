@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Game_Controller : MonoBehaviour
 {
@@ -21,8 +22,9 @@ public class Game_Controller : MonoBehaviour
     void Update()
     {
         time = timeLimit - Time.time + startTime;
-        if (time < 0) {
-            // TODO: Go to ending scene.
+        if (time <= 0) {
+            PlayerPrefs.SetInt("score", scores);
+            SceneManager.LoadScene("Ending");
         }
     }
 }

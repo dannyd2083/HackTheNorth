@@ -2,15 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using TMPro;
 public class UIController : MonoBehaviour
 {
 
-    public 
+
+    public TMP_Text score;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        int final_scores = PlayerPrefs.GetInt("score"); ;
+        score.SetText("" + final_scores);
     }
 
     // Update is called once per frame
@@ -21,7 +24,7 @@ public class UIController : MonoBehaviour
 
     public void startTheGame()
     {
-        SceneManager.LoadScene("MapScene");
+        SceneManager.LoadScene("SampleScene");
     }
 
     public void endTheGame()
