@@ -11,12 +11,18 @@ public class LevelManager : MonoBehaviour {
     public GameObject floorObj;
     public GameObject spawnerObj;
     public GameObject voidObj;
+    public GameObject enemyManager;
+    public GameObject swagManager;
 
     List<GameObject> objects = new List<GameObject>();
+    List<Vector2> spawnable = new List<Vector2>();
+    bool initialized = false;
 
     // Start is called before the first frame update
     void Start() {
-        Initialize(1);
+        if (!initialized) {
+            Initialize(1);
+        }
     }
 
     // Update is called once per frame
@@ -24,7 +30,9 @@ public class LevelManager : MonoBehaviour {
         
     }
 
-    void Initialize(int level) {
+    public void Initialize(int level) {
+        if (initialized) return;
+        initialized = true;
         // Load maps
         loadMapsFromFile("Assets/Maps/Map" + level + ".txt");
         // Load configs - IF TIME PERMITS
@@ -39,12 +47,13 @@ public class LevelManager : MonoBehaviour {
 
     void loadMapsFromFile(string filePath) {
         StreamReader reader = new StreamReader(filePath);
+        spawnable = new List<Vector2>();
         string line;
         int y = 0;
         while ((line = reader.ReadLine()) != null) {
-            for (int i=0, x=0; i<line.Length; i++, x++) {
-                Vector2 position = new Vector2(i, y);
-                switch (line[i]) {
+            for (int x=0; x<line.Length; x++) {
+                Vector2 position = new Vector2(x, y);
+                switch (line[x]) {
                     case 'S':
                         // Create a spawner
                         GameObject spawner = Instantiate(spawnerObj, position, Quaternion.identity);
@@ -59,6 +68,7 @@ public class LevelManager : MonoBehaviour {
                         // Create a table
                         GameObject table = Instantiate(tableObj, position, Quaternion.identity);
                         objects.Add(table);
+                        spawnable.Add(position);
                         break;
                     case 'C':
                         GameObject chair = Instantiate(chairObj, position, Quaternion.identity);
@@ -77,9 +87,10 @@ public class LevelManager : MonoBehaviour {
                         goto case ' ';
                         // Also add a floor tile, so no break here
                     case ' ':
+                        // Create a floor
                         GameObject floor = Instantiate(floorObj, position, Quaternion.identity);
                         objects.Add(floor);
-                        // Create a floor
+                        spawnable.Add(position);
                         break;
                     default:
                     break;
@@ -88,5 +99,10 @@ public class LevelManager : MonoBehaviour {
             y++;
         }
         reader.Close();
+    }
+
+    public Vector2 getRandomPosition()
+    {
+        return spawnable[Random.Range(0, spawnable.Count)];
     }
 }

@@ -5,9 +5,9 @@ using UnityEngine;
 public class Swag : MonoBehaviour
 {
 
-    public int swag_value;
-    public Vector2 position;
-    public int time_to_disappear;
+    public int score;
+    public int combatType;
+    public float despawnTime;
 
     // Start is called before the first frame update
     void Start()
