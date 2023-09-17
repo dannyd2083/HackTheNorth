@@ -19,11 +19,11 @@ public class Swag : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (despawnTime + startTime < Time.time && this != null)
+        /*if (despawnTime + startTime < Time.time && this != null)
         {
             GameObject.Destroy(this);
             // TODO: Something needs to respawn when it disappears
-        }
+        }*/
     }
 
 

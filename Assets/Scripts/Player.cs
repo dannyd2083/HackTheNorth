@@ -37,11 +37,12 @@ public class Player : LivingEntity
         if (collider.gameObject.tag == "swag")
         {
             Swag swagObj = collider.gameObject.GetComponent<Swag>();
-            
+
             // Rhythm game!
             if (swagObj.combatType != 0)
             {
-                Debug.Log("Enter combat stage " + swagObj.combatType);
+                //Debug.Log("Enter combat stage " + swagObj.combatType);
+
                 return;
             }
             // Otherwise just pick it up

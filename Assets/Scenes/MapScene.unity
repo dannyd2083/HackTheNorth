@@ -158,8 +158,8 @@ MonoBehaviour:
   floorObj: {fileID: 7210499651145416677, guid: 16e650e66f3ddf4438a9148318089c14, type: 3}
   spawnerObj: {fileID: 218636194763495326, guid: 5eed197373fbef949b22bbe5e58e1009, type: 3}
   voidObj: {fileID: 1165272732832224229, guid: aa6ff86b31ca6c944b045a2e395c8693, type: 3}
-  enemyManager: {fileID: 0}
-  swagManager: {fileID: 925992236}
+  enemyManager: {fileID: 925992236}
+  swagManager: {fileID: 1233693125}
 --- !u!4 &25727056
 Transform:
   m_ObjectHideFlags: 0
@@ -366,7 +366,7 @@ GameObject:
   - component: {fileID: 839209154}
   - component: {fileID: 839209149}
   - component: {fileID: 839209153}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -387,7 +387,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingHealth: 100
   acceleration: 60
-  body: {fileID: 0}
+  body: {fileID: 839209152}
 --- !u!212 &839209150
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -426,8 +426,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1331783153
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 0, g: 1, b: 0.13454652, a: 1}
