@@ -23,4 +23,9 @@ public class UIController : MonoBehaviour
     {
         SceneManager.LoadScene("SampleScene");
     }
+
+    public void endTheGame()
+    {
+        Application.Quit();
+    }
 }
