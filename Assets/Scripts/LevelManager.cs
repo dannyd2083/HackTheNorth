@@ -23,6 +23,8 @@ public class LevelManager : MonoBehaviour {
     public GameObject enemyManager;
     public GameObject swagManager;
 
+    public TextAsset map;
+
     List<GameObject> objects = new List<GameObject>();
     List<Vector2> spawnable = new List<Vector2>();
     bool initialized = false;
@@ -43,7 +45,7 @@ public class LevelManager : MonoBehaviour {
         if (initialized) return;
         initialized = true;
         // Load maps
-        loadMapsFromFile("Assets/Maps/Map" + level + ".txt");
+        loadMapsFromFile();
         // Load configs - IF TIME PERMITS
     }
 
@@ -54,12 +56,12 @@ public class LevelManager : MonoBehaviour {
         objects.Clear();
     }
 
-    void loadMapsFromFile(string filePath) {
-        StreamReader reader = new StreamReader(filePath);
+    void loadMapsFromFile() {
+        // StreamReader reader = new StreamReader(filePath);
+        string text = map.text;
         spawnable = new List<Vector2>();
-        string line;
         int y = 0;
-        while ((line = reader.ReadLine()) != null) {
+        foreach (string line in text.Split("\n")) {
             for (int x=0; x<line.Length; x++) {
                 Vector2 position = new Vector2(x, y);
                 switch (line[x]) {
@@ -193,7 +195,6 @@ public class LevelManager : MonoBehaviour {
             }
             y++;
         }
-        reader.Close();
     }
 
     public Vector2 getRandomPosition()

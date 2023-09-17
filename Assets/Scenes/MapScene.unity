@@ -169,6 +169,7 @@ MonoBehaviour:
   voidObj: {fileID: 1165272732832224229, guid: aa6ff86b31ca6c944b045a2e395c8693, type: 3}
   enemyManager: {fileID: 925992236}
   swagManager: {fileID: 1233693125}
+  map: {fileID: 4900000, guid: 14edd7f84efda4245b2b681f1b97c67d, type: 3}
 --- !u!4 &25727056
 Transform:
   m_ObjectHideFlags: 0
