@@ -1,34 +1,33 @@
-//////////////#################/
-//////////////#  T T T T T T S#/
-//////////////#              S#/
-//////////////#     TC#CT    S#/
-//////////////#CT   TC#CT   TC#/
-//////////////#CT     #     TC#/
-//////////////#     TC#CT     #/
-//////////////#CT   TC#CT   TC#/
-//////////////#CT     #     TC#/
-//////////////#     TC#CT     #/
-//////////////#CT   TC#CT   TC#/
-//////////////#CT     #     TC#/
-//////////////#     TC#CT     #/
-//////////////#CT   TC#CT   TC#/
-//////////////#CT     #     TC#/
-//////////////#     TC#CT     #/
-//////////////#CT   TC#CT   TC#/
-//////////////#CT     #     TC#/
-//////////////#     TC#CT     #/
-//////////////#CT   TC#CT   TC#/
-//////////////#CT     #     TC#/
-//////////////#     TC#CT     #/
-//////////////#CT   TC#CT   TC#/
-###############CT   #####   TC##
-# SSS               TCCCT     S#
-#                    TTT      S#
-# VVV                         S#
-# VVV   TT TT TT              S#
-# VVV                         S#
-#                         P   S#
-#    TT TT TT TT TT TT        S#
-# SS CC CC CC CC CC CC  SSSS  S#
-################################
-////////////////////////////////
+///////////////DDDDDDDDDDDDDDD//
+//////////////R  T T T T T T SL/
+//////////////R              SL/
+//////////////R     TCXCT    SL/
+//////////////RCT   TCXCT   TCL/
+//////////////RCT     X     TCL/
+//////////////R     TCXCT     L/
+//////////////RCT   TCXCT   TCL/
+//////////////RCT     X     TCL/
+//////////////R     TCXCT     L/
+//////////////RCT   TCXCT   TCL/
+//////////////RCT     X     TCL/
+//////////////R     TCXCT     L/
+//////////////RCT   TCXCT   TCL/
+//////////////RCT     X     TCL/
+//////////////R     TCXCT     L/
+//////////////RCT   TCXCT   TCL/
+//////////////RCT     X     TCL/
+//////////////R     TCXCT     L/
+//////////////RCT   TCXCT   TCL/
+//////////////RCT     X     TCL/
+//////////////R     TCXCT     L/
+//////////////RCT   TCXCT   TCL/
+/DDDDDDDDDDDDD$CT   YYYYY   TC%/
+R SSS               TCCCT     SL
+R                    TTT      SL
+R VVV                         SL
+R VVV   TT TT TT              SL
+R VVV                         SL
+R                         P   SL
+R    TT TT TT TT TT TT        SL
+R SS CC CC CC CC CC CC  SSSS  SL
+/##############################/
