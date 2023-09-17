@@ -1105,7 +1105,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingHealth: 100
-  acceleration: 60
+  acceleration: 45
   body: {fileID: 839209152}
   rhythmController: {fileID: 1893632563}
 --- !u!212 &839209150
@@ -1147,7 +1147,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1331783153
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1187,7 +1187,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 0.8
+  m_Mass: 0.6
   m_LinearDrag: 0.2
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -1248,7 +1248,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.25
+  m_Radius: 0.3
 --- !u!114 &839209155
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1263,11 +1263,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sr: {fileID: 839209150}
   animationRate: 0.2
-  sprites:
+  fwdSprites:
   - {fileID: 21300000, guid: ef7f83a226c37c2489d9751e0d47fc4c, type: 3}
   - {fileID: 21300000, guid: 94497d3b91c88c74b812ad90992dfec5, type: 3}
   - {fileID: 21300000, guid: ef7f83a226c37c2489d9751e0d47fc4c, type: 3}
   - {fileID: 21300000, guid: f69d241dfde19e649a0e13599e614939, type: 3}
+  bckSprites:
+  - {fileID: 21300000, guid: ef7f83a226c37c2489d9751e0d47fc4c, type: 3}
+  - {fileID: 21300000, guid: 94497d3b91c88c74b812ad90992dfec5, type: 3}
+  - {fileID: 21300000, guid: ef7f83a226c37c2489d9751e0d47fc4c, type: 3}
+  - {fileID: 21300000, guid: f69d241dfde19e649a0e13599e614939, type: 3}
+  rightSprites:
+  - {fileID: 21300000, guid: 4f4912520d613384bb6241bcea6d5ff8, type: 3}
+  - {fileID: 21300000, guid: c97e6a0647a3fc846892bd82a9e3cbbd, type: 3}
+  - {fileID: 21300000, guid: 4f4912520d613384bb6241bcea6d5ff8, type: 3}
+  - {fileID: 21300000, guid: 26a02a7907d0b6d4f9bed0dc98236afa, type: 3}
+  rb: {fileID: 0}
 --- !u!1 &848354781
 GameObject:
   m_ObjectHideFlags: 0
