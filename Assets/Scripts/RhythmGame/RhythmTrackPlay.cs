@@ -28,6 +28,11 @@ public class RhythmTrackPlay : MonoBehaviour
     public GameObject button;
     public GameObject bar;
 
+    private AudioSource audioSource;
+    public List<AudioClip> clipList;
+
+    public AudioSource swagSource;
+
     private float beats = 4.0f;
     private RectTransform rect;
     private RhythmController.RhythmPattern pattern;
@@ -118,6 +123,7 @@ public class RhythmTrackPlay : MonoBehaviour
 
                 if (keyPressed != MoveDirection.None)
                 {
+                    MoveDirection playAudio = MoveDirection.None;
                     GameObject newObject = Instantiate(button, transform);
                     RhythmButton buttonScript = newObject.GetComponent<RhythmButton>();
                     Text text = buttonScript.phrase;
@@ -141,12 +147,15 @@ public class RhythmTrackPlay : MonoBehaviour
                                 score.swagCount++;
                                 text.text = pattern.keys[currentIndex].phrase;
                                 text.color = swagColor;
+                                playAudio = keyPressed;
+                                swagSource.Play();
                             }
                             else if (Math.Abs(error) <= okayThreshold)
                             {
                                 score.okayCount++;
                                 text.text = pattern.keys[currentIndex].phrase + "?";
                                 text.color = okayColor;
+                                playAudio = keyPressed;
                             }
                             else
                             {
@@ -154,6 +163,12 @@ public class RhythmTrackPlay : MonoBehaviour
                             }
                             currentIndex++;
                         }
+                    }
+
+                    if ((int)(playAudio) < clipList.Count)
+                    {
+                        audioSource.clip = clipList[(int)(playAudio)];
+                        audioSource.Play();
                     }
                 }
                 if (currentIndex < pattern.keys.Count && (timePassed - pattern.keys[currentIndex].beat * 60 / bpm) > badThreshold)
@@ -179,6 +194,7 @@ public class RhythmTrackPlay : MonoBehaviour
     {   
         // RhythmScore score = new RhythmScore();
         // StartCoroutine(PlayPattern(score));
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame

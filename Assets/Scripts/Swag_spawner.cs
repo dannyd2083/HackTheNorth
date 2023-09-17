@@ -54,7 +54,7 @@ public class Swag_spawner : MonoBehaviour
         swagDataList = new List<SwagData>();
         while ((line = reader.ReadLine()) != null)
         {
-            Debug.Log(line);
+            //Debug.Log(line);
             string[] data = line.Split(' ');
             int value = int.Parse(data[0]);
             int combatType = int.Parse(data[1]);

@@ -14,11 +14,13 @@ public class EnemyManager : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
-        spawners = new List<GameObject>(GameObject.FindGameObjectsWithTag("spawner"));
     }
 
     // Update is called once per frame
     void Update() {
+
+        spawners = new List<GameObject>(GameObject.FindGameObjectsWithTag("spawner"));
+
         // Check for dead (destroyed) enemies
         for (int i = 0; i < enemies.Count; i++) {
             if (enemies[i] == null) {

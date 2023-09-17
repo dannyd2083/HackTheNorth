@@ -285,6 +285,9 @@ MonoBehaviour:
   max_number_list: 10
   instantiate_range_x: 0
   instantiate_range_y: 0
+  value_set: 140000002800000032000000
+  time_set: 000000001600000059000000
+  sprites: []
 --- !u!114 &122764116
 MonoBehaviour:
   m_ObjectHideFlags: 0
