@@ -11,6 +11,14 @@ public class Game_Controller : MonoBehaviour
     public int timeLimit = 180;
     public Swag_spawner swag_spawner;
     public LevelManager lm;
+    public bool movementDisabled = false;
+
+    public static Game_Controller instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     // Start is called before the first frame update
     void Start()

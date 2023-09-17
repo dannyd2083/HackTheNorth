@@ -48,12 +48,12 @@ public class RhythmMinigame : MonoBehaviour
 
     public IEnumerator PlayPattern(RhythmScore score)
     {
-        float leadingBeatNum = bgm.beatsPerMeasure - leadingBeats;
+        float leadingBeatNum = 1f - leadingBeats;
         bool lowBeat = false;
-        while (!lowBeat || bgm.BeatInMeasure < leadingBeatNum)
+        while (!lowBeat || bgm.BeatInMeasure - Mathf.Floor(bgm.BeatInMeasure) < leadingBeatNum)
         {
             yield return null;
-            if (bgm.BeatInMeasure < leadingBeatNum)
+            if (bgm.BeatInMeasure - Mathf.Floor(bgm.BeatInMeasure) < leadingBeatNum)
             {
                 lowBeat = true;
             }
