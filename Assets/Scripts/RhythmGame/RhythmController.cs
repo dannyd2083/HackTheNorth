@@ -102,12 +102,18 @@ public class RhythmController : MonoBehaviour
         newPos = new Vector2(rect.anchoredPosition.x, initialYPos - yOffset);
         rect.anchoredPosition = newPos;
         Debug.Log("Sliding Out Complete");
+        if (Game_Controller.instance.time >= 0) 
+        {
+            Game_Controller.instance.movementDisabled = false;
+        }
+        isRunning = false;
     }
 
-    public IEnumerator RhythmSequence (int difficulty)
+    public IEnumerator RhythmSequence (int difficulty, Game_Controller gm, int baseScore)
     {
         if (isRunning) { yield break; }
         isRunning = true;
+        Game_Controller.instance.movementDisabled = true;
         string text = "";
         switch (difficulty)
         {
@@ -132,8 +138,17 @@ public class RhythmController : MonoBehaviour
 
         yield return minigame.PlayPattern(score);
 
-        yield return SlideOut(0.2f);
-        isRunning = false;
+        float successRatio = score.CalculateSuccessRatio(chosen.keys.Count);
+        if (successRatio >= 0.8f)
+        {
+            gm.scores += Mathf.CeilToInt(baseScore);
+        }
+        else if (successRatio >= 0.5f)
+        {
+            gm.scores += Mathf.CeilToInt(baseScore * 0.5f);
+
+        }
+        StartCoroutine(SlideOut(0.2f));
     }
 
     // Start is called before the first frame update
@@ -143,7 +158,7 @@ public class RhythmController : MonoBehaviour
         initialYPos = rect.anchoredPosition.y;
         rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, initialYPos - yOffset);
 
-        StartCoroutine(RhythmSequence(3));
+        // StartCoroutine(RhythmSequence(3));
     }
 
     // Update is called once per frame
