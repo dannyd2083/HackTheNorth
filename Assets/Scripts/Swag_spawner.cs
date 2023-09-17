@@ -78,13 +78,13 @@ public class Swag_spawner : MonoBehaviour
         do {
             position = lm.getRandomPosition();
             foreach (Swag curSwag in swagList) {
-                if (((Vector2)curSwag.transform.position - position).magnitude < 1)
-                {
+                if (((Vector2)curSwag.transform.position - position).magnitude < 1) {
                     continue;
                 }
             }
         } while (false);
         Swag s = Instantiate(swag_prefab, position, Quaternion.identity);
+        Debug.Log("Spawned!");
         SwagData data = getRandomSwagData();
         s.score = data.value;
         s.combatType = data.combatType;
@@ -108,6 +108,6 @@ public class Swag_spawner : MonoBehaviour
 
     public void Remove(Swag s) {
         swagList.Remove(s);
-        Destroy(s.gameObject);
+        //Destroy(s.gameObject);
     }
 }

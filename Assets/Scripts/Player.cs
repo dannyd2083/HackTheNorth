@@ -44,11 +44,13 @@ public class Player : LivingEntity
                 Debug.Log("Enter combat stage " + swagObj.combatType);
                 return;
             }
-            // Otherwise just pick it up
-            gm.scores += swagObj.score;
-            GameObject.Destroy(collider.gameObject);
-            gm.swag_spawner.Remove(swagObj);
+            // Otherwise just pick it up & spawn a new one
+            
             gm.swag_spawner.Spawn();
+
+            gm.scores += swagObj.score;
+            gm.swag_spawner.Remove(swagObj);
+            GameObject.Destroy(collider.gameObject);
         }
 
     }

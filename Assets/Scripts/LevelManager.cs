@@ -6,6 +6,9 @@ using UnityEngine;
 public class LevelManager : MonoBehaviour {
 
     public GameObject wallObj;
+    public GameObject wallObj3;
+    public GameObject wallObj4;
+    public GameObject wallObj5;
     public GameObject tableObj;
     public GameObject chairObj;
     public GameObject floorObj;
@@ -60,9 +63,44 @@ public class LevelManager : MonoBehaviour {
                         objects.Add(spawner);
                         break;
                     case '#':
-                        // Create a wall
-                        GameObject wall = Instantiate(wallObj, position, Quaternion.identity);
+                        // Create a wall (upright)
+                        GameObject wall = Instantiate(wallObj, position + new Vector2(0.0f, 0.4f), Quaternion.identity);
                         objects.Add(wall);
+                        break;
+                    case 'L':
+                        // Create a wall
+                        GameObject wall4L = Instantiate(wallObj4, position, Quaternion.identity);
+                        objects.Add(wall4L);
+                        break;
+                    case 'R':
+                        // Create a wall
+                        GameObject wall4R = Instantiate(wallObj4, position, Quaternion.Euler(Vector3.forward * 180));
+                        objects.Add(wall4R);
+                        break;
+                    case 'D':
+                        // Create a wall
+                        GameObject wall4D = Instantiate(wallObj4, position, Quaternion.Euler(Vector3.forward * 270));
+                        objects.Add(wall4D);
+                        break;
+                    case '$':
+                        // Create a wall
+                        GameObject wall5270 = Instantiate(wallObj5, position, Quaternion.Euler(Vector3.forward * 270));
+                        objects.Add(wall5270);
+                        break;
+                    case '%':
+                        // Create a wall
+                        GameObject wall5 = Instantiate(wallObj5, position, Quaternion.identity);
+                        objects.Add(wall5);
+                        break;
+                    case 'X':
+                        // Wall 3 - Upright
+                        GameObject wall3a = Instantiate(wallObj3, position, Quaternion.identity);
+                        objects.Add(wall3a);
+                        break;
+                    case 'Y':
+                        // Wall 3 - Sideways
+                        GameObject wall3b = Instantiate(wallObj3, position, Quaternion.Euler(Vector3.forward * 90));
+                        objects.Add(wall3b);
                         break;
                     case 'T':
                         // Create a table
@@ -71,26 +109,32 @@ public class LevelManager : MonoBehaviour {
                         spawnable.Add(position);
                         break;
                     case 'C':
+                        // Create a chair
                         GameObject chair = Instantiate(chairObj, position, Quaternion.identity);
                         objects.Add(chair);
-                        // Create a chair
-                        break;
+                        // Fill in the void
+                        goto case 'x';
                     case 'V':
+                        // Create a void
                         GameObject void_ = Instantiate(voidObj, position, Quaternion.identity);
                         objects.Add(void_);
-                        // Create a void
                         break;
                     case 'P':
                         // Teleport the player here
                         GameObject player = GameObject.FindGameObjectsWithTag("Player")[0];
                         player.transform.position = position;
-                        goto case ' ';
+                        goto case 'x';
                         // Also add a floor tile, so no break here
                     case ' ':
                         // Create a floor
                         GameObject floor = Instantiate(floorObj, position, Quaternion.identity);
                         objects.Add(floor);
                         spawnable.Add(position);
+                        break;
+                    case 'x':
+                        // Create a floor that is not spawnable
+                        GameObject floor_ = Instantiate(floorObj, position, Quaternion.identity);
+                        objects.Add(floor_);
                         break;
                     default:
                     break;

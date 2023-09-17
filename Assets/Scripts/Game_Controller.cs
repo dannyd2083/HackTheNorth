@@ -14,7 +14,6 @@ public class Game_Controller : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        swag_spawner = GetComponent<Swag_spawner>();
         startTime = Time.time;
     }
 
