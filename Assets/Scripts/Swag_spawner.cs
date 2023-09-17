@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using System.IO;
+using System;
 
 public class Swag_spawner : MonoBehaviour
 {
     public LevelManager lm;
     public List<Swag> swagList;
-    List<SwagData> swagDataList;
+    public List<SwagData> swagDataList;
     int totalWeight;
     public Swag swag_prefab;
     public int max_number_list;
@@ -26,7 +27,13 @@ public class Swag_spawner : MonoBehaviour
         // Make sure lm is initialized
         lm.Initialize(1);
 
-        loadInfoFromFile("Assets/Maps/data1.txt");
+        totalWeight = 0;
+        foreach (var entry in swagDataList)
+        {
+            totalWeight += entry.weight;
+        }
+
+        // loadInfoFromFile("Assets/Maps/data1.txt");
 
         // Spawn in a bunch of swag
         for (int i=0; i<max_number_list; i++)
@@ -40,38 +47,40 @@ public class Swag_spawner : MonoBehaviour
         
     }
 
+    [Serializable]
     public struct SwagData
     {
         public int value;
         public int combatType;
         public int weight;
         public string name;
+        public Sprite sprite;
     }
 
-    public void loadInfoFromFile(string filePath) {
-        StreamReader reader = new StreamReader(filePath);
-        string line;
-        swagDataList = new List<SwagData>();
-        while ((line = reader.ReadLine()) != null)
-        {
-            //Debug.Log(line);
-            string[] data = line.Split(' ');
-            int value = int.Parse(data[0]);
-            int combatType = int.Parse(data[1]);
-            int weight = int.Parse(data[2]);
-            string name = data[3].Replace('_', ' ');
-            // add the data to swagdatalist
-            SwagData swagData = new SwagData();
-            swagData.value = value;
-            swagData.combatType = combatType;
-            swagData.weight = weight;
-            swagData.name = name;
-            swagDataList.Add(swagData);
+    //public void loadInfoFromFile(string filePath) {
+    //    StreamReader reader = new StreamReader(filePath);
+    //    string line;
+    //    swagDataList = new List<SwagData>();
+    //    while ((line = reader.ReadLine()) != null)
+    //    {
+    //        //Debug.Log(line);
+    //        string[] data = line.Split(' ');
+    //        int value = int.Parse(data[0]);
+    //        int combatType = int.Parse(data[1]);
+    //        int weight = int.Parse(data[2]);
+    //        string name = data[3].Replace('_', ' ');
+    //        // add the data to swagdatalist
+    //        SwagData swagData = new SwagData();
+    //        swagData.value = value;
+    //        swagData.combatType = combatType;
+    //        swagData.weight = weight;
+    //        swagData.name = name;
+    //        swagDataList.Add(swagData);
 
-            totalWeight += weight;
-        }
-        reader.Close();
-    }
+    //        totalWeight += weight;
+    //    }
+    //    reader.Close();
+    //}
 
     public void Spawn() {
         Vector2 position = Vector2.zero;
@@ -89,11 +98,12 @@ public class Swag_spawner : MonoBehaviour
         s.score = data.value;
         s.combatType = data.combatType;
         s.name = data.name;
+        s.GetComponent<SpriteRenderer>().sprite = data.sprite;
         swagList.Add(s);
     }
 
     SwagData getRandomSwagData() {
-        int randomWeight = Random.Range(0, totalWeight);
+        int randomWeight = UnityEngine.Random.Range(0, totalWeight);
         int currentWeight = 0;
         foreach (SwagData swagData in swagDataList)
         {

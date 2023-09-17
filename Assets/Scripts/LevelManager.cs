@@ -10,7 +10,13 @@ public class LevelManager : MonoBehaviour {
     public GameObject wallObj4;
     public GameObject wallObj5;
     public GameObject tableObj;
+    public GameObject tableH1Obj;
+    public GameObject tableH2Obj;
+    public GameObject tableH3Obj;
+    public GameObject tableV1Obj;
+    public GameObject tableV2Obj;
     public GameObject chairObj;
+    public GameObject chairSideObj;
     public GameObject floorObj;
     public GameObject spawnerObj;
     public GameObject voidObj;
@@ -103,17 +109,62 @@ public class LevelManager : MonoBehaviour {
                         objects.Add(wall3b);
                         break;
                     case 'T':
-                        // Create a table
-                        GameObject table = Instantiate(tableObj, position, Quaternion.identity);
-                        objects.Add(table);
-                        spawnable.Add(position);
-                        break;
+                        {
+                            // Create a table
+                            GameObject table = Instantiate(tableObj, position, Quaternion.identity);
+                            objects.Add(table);
+                            spawnable.Add(position);
+                            break;
+                        }
+                    case '[':
+                        {
+                            // Create a table
+                            GameObject table = Instantiate(tableH1Obj, position, Quaternion.identity);
+                            objects.Add(table);
+                            spawnable.Add(position);
+                            break;
+                        }
+                    case '=':
+                        {
+                            // Create a table
+                            GameObject table = Instantiate(tableH2Obj, position, Quaternion.identity);
+                            objects.Add(table);
+                            spawnable.Add(position);
+                            break;
+                        }
+                    case ']':
+                        {
+                            // Create a table
+                            GameObject table = Instantiate(tableH3Obj, position, Quaternion.identity);
+                            objects.Add(table);
+                            spawnable.Add(position);
+                            break;
+                        }
                     case 'C':
-                        // Create a chair
-                        GameObject chair = Instantiate(chairObj, position, Quaternion.identity);
-                        objects.Add(chair);
-                        // Fill in the void
-                        goto case 'x';
+                        {
+                            // Create a chair
+                            GameObject chair = Instantiate(chairObj, position, Quaternion.identity);
+                            objects.Add(chair);
+                            // Fill in the void
+                            goto case 'x';
+                        }
+                    case '(':
+                        {
+                            // Create a chair
+                            GameObject chair = Instantiate(chairSideObj, position, Quaternion.identity);
+                            objects.Add(chair);
+                            // Fill in the void
+                            goto case 'x';
+                        }
+                    case ')':
+                        {
+                            // Create a chair
+                            GameObject chair = Instantiate(chairSideObj, position, Quaternion.identity);
+                            chair.GetComponent<SpriteRenderer>().flipX = true;
+                            objects.Add(chair);
+                            // Fill in the void
+                            goto case 'x';
+                        }
                     case 'V':
                         // Create a void
                         GameObject void_ = Instantiate(voidObj, position, Quaternion.identity);
