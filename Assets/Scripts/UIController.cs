@@ -21,7 +21,7 @@ public class UIController : MonoBehaviour
 
     public void startTheGame()
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("MapScene");
     }
 
     public void endTheGame()
