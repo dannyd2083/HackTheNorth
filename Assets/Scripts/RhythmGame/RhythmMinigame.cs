@@ -30,10 +30,6 @@ public class RhythmMinigame : MonoBehaviour
     public Sprite okaySprite;
     public Sprite badSprite;
 
-    public TextAsset easyPatternsFile;
-    public TextAsset mediumPatternsFile;
-    public TextAsset hardPatternsFile;
-
     public MusicSync bgm;
 
     private RhythmPattern pattern;
@@ -77,7 +73,7 @@ public class RhythmMinigame : MonoBehaviour
             image.sprite = badSprite;
         }
         image.gameObject.SetActive(true);
-        yield return new WaitForSeconds(leadingBeats / timeMultiplier * 60 / bpm);
+        yield return new WaitForSeconds(1f / timeMultiplier * 60 / bpm);
         image.gameObject.SetActive(false);
     }
 
@@ -97,26 +93,6 @@ public class RhythmMinigame : MonoBehaviour
         mimicTrack.swagColor = makerTrack.swagColor = swagColor;
         mimicTrack.okayColor = makerTrack.okayColor = okayColor;
         mimicTrack.badColor = makerTrack.badColor = badColor;
-
-        AvailablePatterns easyPatterns = JsonUtility.FromJson<AvailablePatterns>(hardPatternsFile.text);
-        RhythmPattern chosen = easyPatterns.patterns[Random.Range(0, easyPatterns.patterns.Count)];
-        ApplyRhythmPattern(chosen);
-        /*
-        ApplyRhythmPattern(new RhythmController.RhythmPattern(
-            new List<RhythmController.RhythmKey>(
-                new RhythmController.RhythmKey[]
-                {
-                    new RhythmController.RhythmKey(0.0f, "This", MoveDirection.Left),
-                    new RhythmController.RhythmKey(1.0f, "is", MoveDirection.Right),
-                    new RhythmController.RhythmKey(2.0f, "a", MoveDirection.Up),
-                    new RhythmController.RhythmKey(3.0f, "test", MoveDirection.Down),
-
-                }),
-            4.0f));
-        */
-        Debug.Log(JsonUtility.ToJson(pattern));
-        RhythmScore score = new RhythmScore();
-        StartCoroutine(PlayPattern(score));
     }
 
     // Update is called once per frame
