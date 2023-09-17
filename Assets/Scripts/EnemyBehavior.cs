@@ -54,29 +54,40 @@ public class EnemyBehavior : MonoBehaviour
         }
 
         // Direction to move in
-        Vector2 deltaPos = Vector2.zero;
-        switch (movementScheme) {
-        case MovementScheme.WANDERING: {
-                deltaPos = targetPosition - (Vector2)transform.position;
-            }
-            break;
-        case MovementScheme.SWARMING: {
-                deltaPos = (Vector2)targetObject.gameObject.transform.position - (Vector2)transform.position;
-            }
-            break;
-        case MovementScheme.RETREATING: {
-                // Simple straight line retreating
-                deltaPos = (Vector2)targetObject.gameObject.transform.position - (Vector2)transform.position;
-            }
-            break;
-        case MovementScheme.BROWSING: {
-                // NOT IMPLEMENTED - IF WE HAVE TIME!
-            }
-            break;
-        }
+        Vector2 deltaPos = getDeltaPos();
         Vector2 acceleration = deltaPos.normalized * defaultAcceleration * Time.deltaTime;
 
         rb.AddForce(acceleration);
+    }
+
+    public Vector2 getDeltaPos()
+    {
+        Vector2 deltaPos = Vector2.zero;
+        switch (movementScheme)
+        {
+            case MovementScheme.WANDERING:
+                {
+                    deltaPos = targetPosition - (Vector2)transform.position;
+                }
+                break;
+            case MovementScheme.SWARMING:
+                {
+                    deltaPos = (Vector2)targetObject.gameObject.transform.position - (Vector2)transform.position;
+                }
+                break;
+            case MovementScheme.RETREATING:
+                {
+                    // Simple straight line retreating
+                    deltaPos = (Vector2)targetObject.gameObject.transform.position - (Vector2)transform.position;
+                }
+                break;
+            case MovementScheme.BROWSING:
+                {
+                    // NOT IMPLEMENTED - IF WE HAVE TIME!
+                }
+                break;
+        }
+        return deltaPos;
     }
 
     public void acquireTarget() {

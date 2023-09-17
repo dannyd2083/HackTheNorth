@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5500660965749239262}
   - component: {fileID: 2028374539300031584}
   - component: {fileID: 8103371982249725935}
+  - component: {fileID: 3454405600555265327}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -30,8 +31,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.85, y: 0.71, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -74,7 +75,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1331783153
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
@@ -148,7 +149,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.25
 --- !u!114 &8103371982249725935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,3 +166,33 @@ MonoBehaviour:
   lm: {fileID: 0}
   exitTime: 50
   arrivalLimit: 0.02
+--- !u!114 &3454405600555265327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7520980658288663463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f0ae8b8167d7e647abdc91f8d0adc9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sr: {fileID: 4854391950347420717}
+  animationRate: 0.2
+  fwdSprites:
+  - {fileID: 21300000, guid: c3c5bd7c688968a439eb1d9aa95004f6, type: 3}
+  - {fileID: 21300000, guid: 31ba865fc3ca7b241b4c1ca0936abd0a, type: 3}
+  - {fileID: 21300000, guid: c3c5bd7c688968a439eb1d9aa95004f6, type: 3}
+  - {fileID: 21300000, guid: 5f58ea9c78630c34da69bfcc969e21ed, type: 3}
+  bckSprites:
+  - {fileID: 21300000, guid: b02b6d6525befe744a6b057c14bfd2ea, type: 3}
+  - {fileID: 21300000, guid: 698e2b3d25a0f724e88c2d44c7dc356d, type: 3}
+  - {fileID: 21300000, guid: b02b6d6525befe744a6b057c14bfd2ea, type: 3}
+  - {fileID: 21300000, guid: 8eb8c542bd073c349863f211d2610a78, type: 3}
+  rightSprites:
+  - {fileID: 21300000, guid: 0538fb2fe6de24b4e9d5ef2ad53f967c, type: 3}
+  - {fileID: 21300000, guid: 2f48070fbd6133640ba7a6842baa6e2c, type: 3}
+  - {fileID: 21300000, guid: 0538fb2fe6de24b4e9d5ef2ad53f967c, type: 3}
+  - {fileID: 21300000, guid: 2f48070fbd6133640ba7a6842baa6e2c, type: 3}
+  eb: {fileID: 8103371982249725935}
