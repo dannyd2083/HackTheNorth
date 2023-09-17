@@ -7,8 +7,7 @@ using UnityEngine;
 public class EnemyBehavior : MonoBehaviour
 {
     public float defaultAcceleration;
-    public float maxX;
-    public float maxY;
+    public LevelManager lm;
     public float exitTime; // After 100 seconds, the enemy will leave the HTN Sponsor Area
     public float arrivalLimit; // If the enemy is within this distance of the wandering target, it has arrived and will find a new target
                                // Note that other targets use the colliders. This is just for wandering because no object actually exists there.
@@ -106,8 +105,9 @@ public class EnemyBehavior : MonoBehaviour
     }
 
     public void acquireWanderTarget() {
-        // Go to a random, valid tile
-        targetPosition = new Vector2(Random.Range(-maxX, maxX), Random.Range(-maxY, maxY));
+        // Go to a random tile.
+        // NOT IMPLEMENTED
+        targetPosition = new Vector2(26, 29);
         movementScheme = MovementScheme.WANDERING;
     }
 

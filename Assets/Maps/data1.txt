@@ -1,2 +1,8 @@
-﻿difficulty=1
-time=180
+﻿1 0 20 Pen
+2 0 18 Sticker
+3 0 15 Notebook
+5 0 12 Shirt
+10 1 10 NOT_IMPLEMENTED
+20 2 8 Cockroach_Trophy
+30 2 1 RBC_Ring_Light
+30 1 1 Bubble_Tea

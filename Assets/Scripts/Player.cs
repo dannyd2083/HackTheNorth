@@ -6,7 +6,7 @@ public class Player : LivingEntity
 {
 
     public float acceleration;
-    Camera viewCamera;
+    //Camera viewCamera;
     PlayerController controller;
     Vector2 movement;
     Game_Controller gm;
@@ -16,7 +16,7 @@ public class Player : LivingEntity
     // Start is called before the first frame update
     protected override void Start() {
         base.Start();
-        viewCamera = Camera.main;
+        //viewCamera = Camera.main;
         controller = GetComponent<PlayerController>();
         gm = FindObjectOfType<Game_Controller>();
         
@@ -36,12 +36,19 @@ public class Player : LivingEntity
     {
         if (collider.gameObject.tag == "swag")
         {
-            Debug.Log("destroy");
-            GameObject.Destroy(collider.gameObject);
-            gm.scores =+ collider.gameObject.GetComponent<Swag>().swag_value;
-            gm.swag_spawner.remove(collider.gameObject.GetComponent<Swag>());
-            gm.swag_spawner.spwan();
+            Swag swagObj = collider.gameObject.GetComponent<Swag>();
             
+            // Rhythm game!
+            if (swagObj.combatType != 0)
+            {
+                Debug.Log("Enter combat stage " + swagObj.combatType);
+                return;
+            }
+            // Otherwise just pick it up
+            gm.scores += swagObj.score;
+            GameObject.Destroy(collider.gameObject);
+            gm.swag_spawner.Remove(swagObj);
+            gm.swag_spawner.Spawn();
         }
 
     }
