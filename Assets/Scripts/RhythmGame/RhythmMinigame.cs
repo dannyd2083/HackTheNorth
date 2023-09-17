@@ -31,6 +31,9 @@ public class RhythmMinigame : MonoBehaviour
     public Sprite badSprite;
 
     public MusicSync bgm;
+    public AudioSource swagSource;
+    public AudioSource okaySource;
+    public AudioSource badSource;
 
     private RhythmPattern pattern;
 
@@ -63,14 +66,17 @@ public class RhythmMinigame : MonoBehaviour
         if (scoreRatio >= 0.8)
         {
             image.sprite = swagSprite;
+            swagSource.Play();
         }
         else if (scoreRatio >= 0.5)
         {
             image.sprite = okaySprite;
+            okaySource.Play();
         }
         else
         {
             image.sprite = badSprite;
+            badSource.Play();
         }
         image.gameObject.SetActive(true);
         yield return new WaitForSeconds(1f / timeMultiplier * 60 / bpm);
